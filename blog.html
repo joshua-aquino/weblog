@@ -1,0 +1,9 @@
+{{ $years := .Years }}
+{{ $blogs := .Blogs }}
+<h1>Blogs</h1>
+{{ range $year := $years}} 
+  <h2>{{ $year }}</h2>
+  {{ range $blog := $blogs}} 
+  <p>{{ $blog }}</p>
+  {{ end }}
+{{ end }}
