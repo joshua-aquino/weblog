@@ -39,7 +39,7 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         log.Fatal(err)
     }
-    yearsBlogs[i] = make([]string, len(files))
+    yearsBlogs[i] = []string{}
     yearsBlogs[i] = append(yearsBlogs[i], y.Name())
     for _, f := range files {
       yearsBlogs[i] = append(yearsBlogs[i], f.Name())

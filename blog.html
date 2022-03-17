@@ -1,4 +1,15 @@
-{{ $years := .YearsBlogs }}
 <h1>Blogs</h1>
-{{ $years }}
-{{ .Bang }}
+{{ range $year := .YearsBlogs }}
+  {{ range $index, $blog := $year }}
+    {{ if eq ($index) 0 }}
+    <h2>{{ $blog }}</h2>
+    <ul>
+    {{ else }}
+    <li>
+      {{ $blog }}
+    </li>
+    {{ end }}
+  {{ end }}
+</ul>
+{{ end }}
+{{ .YearsBlogs }}
