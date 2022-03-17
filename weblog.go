@@ -7,7 +7,7 @@ import (
   "html/template"
   "os"
   "log"
-  "fmt"
+//  "fmt"
 )
 
 /*
@@ -17,9 +17,8 @@ type BlogPage struct {
 }
 */
 
-type BlogHome struct {
-  Years []string
-  Blogs []string
+type ArchiveData struct {
+  YearsBlogs [][]string
 }
 
 /*
@@ -29,27 +28,25 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 */
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
-  var blogYears = []string{}
-  var blogs = []string{}
-  files, err := os.ReadDir("./blog")
+  years, err := os.ReadDir("./blog")
   if err != nil {
       log.Fatal(err)
   }
-  for _, f := range files {
-    blogYears = append(blogYears, f.Name())
-    giles, err := os.ReadDir("./blog/" + f.Name())
+  yearsBlogs := make([][]string, len(years))
+  i:=0
+  for _, y := range years {
+    files, err := os.ReadDir("./blog/" + y.Name())
     if err != nil {
         log.Fatal(err)
     }
-    for _, g := range giles {
-      blogs = append(blogs, g.Name())
-      fmt.Println(blogs)
-      fmt.Fprintf(w, blogs)
+    yearsBlogs[i] = make([]string, len(files))
+    yearsBlogs[i] = append(yearsBlogs[i], y.Name())
+    for _, f := range files {
+      yearsBlogs[i] = append(yearsBlogs[i], f.Name())
     }
-    blogs = nil
+    i = i + 1
   }
-
-  p := BlogHome{Years: blogYears, Blogs: blogs}
+  p := ArchiveData{YearsBlogs: yearsBlogs}
   t, _ := template.ParseFiles("blog.html")
   t.Execute(w, p)
 /*
