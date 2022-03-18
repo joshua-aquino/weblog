@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -51,7 +52,8 @@ func Serve(w http.ResponseWriter, r *http.Request) {
 
 var routes = []route{
 	addRoute("GET", "/", home),
-	addRoute("GET", "/blog", blog),
+	addRoute("GET", "/blog(/)?", blogArchive),
+	addRoute("GET", "/blog/([^/]+)", blog),
 }
 
 //------------------------------------------------------------------------------
@@ -70,7 +72,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
-func blog(w http.ResponseWriter, r *http.Request) {
+func blogArchive(w http.ResponseWriter, r *http.Request) {
 	years, err := os.ReadDir(blogDir)
 	if err != nil {
 		log.Fatal(err)
@@ -94,6 +96,15 @@ func blog(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, p)
 }
 
+func blog(w http.ResponseWriter, r *http.Request) {
+	slug := getField(r, 0)
+	fmt.Fprintf(w, "blog %s\n", slug)
+	p := ctxKey{}
+	t, _ := template.ParseFiles(blogDir + "blog.html")
+	t.Execute(w, p)
+}
+
+/*
 func main() {
 	http.HandleFunc("/", Serve)
 	http.ListenAndServe(":8000", nil)

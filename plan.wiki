@@ -1,0 +1,18 @@
+_Let's get this bread._
+
+-------------------------------------------------------------------------------
+== blog home ==
+
+===2021===
+
+* chimpus eave
+* chimbus
+* after christis
+
+===2022===
+
+* first blog
+
+-------------------------------------------------------------------------------
+blogs should be divided into years, and each year should have an array of blogs
+ordered by month, then ordered by day
