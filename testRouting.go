@@ -63,9 +63,8 @@ var routes = []route{
 //------------------------------------------------------------------------------
 
 type ArchiveEntry struct {
-	title    string
-	isYear   bool
-	fileName string
+	Title, FileName, BlogDir string
+	IsYear                   bool
 }
 
 // the title finding function should not be run everytime you update the page,
@@ -81,19 +80,20 @@ func completeArchives() []ArchiveEntry {
 	}
 	i := 0
 	for _, f := range files {
-		archiveEntry = ArchiveEntry{}
+		archiveEntry = ArchiveEntry{"none", "none", blogDir, false}
 		presentYear := strings.Split(f.Name(), "-")[0]
 
 		if presentYear != lastYear {
 			//make a new entry and don't do the rest
-			archiveEntry.title = presentYear
-			archiveEntry.isYear = true
+			archiveEntry.Title = presentYear
+			archiveEntry.IsYear = true
 			lastYear = presentYear
 			archiveEntries = append(archiveEntries, archiveEntry)
 			i = i + 1
 		}
+		archiveEntry.IsYear = false
 		var titleFound bool = false
-		archiveEntry.fileName = f.Name()
+		archiveEntry.FileName = f.Name()
 		readFile, err := os.Open(blogDir + f.Name())
 
 		if err != nil {
@@ -109,13 +109,13 @@ func completeArchives() []ArchiveEntry {
 		readFile.Close()
 		for _, eachline := range fileTextLines {
 			if re.MatchString(eachline) {
-				archiveEntry.title =
+				archiveEntry.Title =
 					strings.ReplaceAll(re.FindString(eachline), "<title>", "")
 				titleFound = true
 			}
 		}
 		if !titleFound {
-			archiveEntry.title = archiveEntry.fileName
+			archiveEntry.Title = archiveEntry.FileName
 		}
 		archiveEntries = append(archiveEntries, archiveEntry)
 		i = i + 1
@@ -133,7 +133,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 func blogArchive(w http.ResponseWriter, r *http.Request) {
 	p := completeArchives()
-	log.Println(p[0].title)
+	log.Println(p[0].Title)
 	t, _ := template.ParseFiles(templateDir + "archive.html")
 	t.Execute(w, p)
 	// template files cannot read the individual values within struct arrays; I
@@ -142,7 +142,7 @@ func blogArchive(w http.ResponseWriter, r *http.Request) {
 
 func blog(w http.ResponseWriter, r *http.Request) {
 	p := ctxKey{}
-	t, _ := template.ParseFiles(templateDir + "home.html")
+	t, _ := template.ParseFiles(blogDir + getField(r, 0))
 	t.Execute(w, p)
 }
 

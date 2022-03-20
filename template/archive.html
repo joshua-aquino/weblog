@@ -1,3 +1,9 @@
 <h1>Archive</h1>
-{{(index . 0).title}}
-<br />
+{{range $y, $x := .}}
+  {{if eq ($x.IsYear) true}}
+  <h2>20{{$x.Title}}</h2>
+  {{else}}
+  <a href="{{$x.BlogDir}}/{{$x.FileName}}">{{$x.Title}}</a>
+  <br/>
+  {{end}}
+{{end}}
