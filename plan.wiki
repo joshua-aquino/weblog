@@ -16,3 +16,10 @@ _Let's get this bread._
 -------------------------------------------------------------------------------
 blogs should be divided into years, and each year should have an array of blogs
 ordered by month, then ordered by day
+
+the blog printer completes the entire archive logic;
+it sends out an array of structs ::
+  title string (is either a year or a blog)
+  isYear bool (if true, page logic prints title as a header and skips filename)
+  filename string (default empty, is what the page uses for href)
+  
