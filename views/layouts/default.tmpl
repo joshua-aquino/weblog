@@ -1,0 +1,41 @@
+{{define "default"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="This is Joshua Aquino's website."
+	<meta name="author" content="Joshua Aquino">
+	<link rel="icon" type="image/ico" href="/static/images/logo.png">
+	<title>Joshua Aquino</title>
+	<link href="/static/normalize.css" rel="stylesheet">
+	<link href="/static/style.css" rel="stylesheet">
+</head>
+<body>
+  <div id='page'>
+    <header>
+      <h1>JOSHUA AQUINO</h1>
+      <div>
+        <a href="https://github.com/joshua-aquino/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+        &nbsp
+        <a href="https://www.linkedin.com/in/joshua-aquino-66b680194/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+      </div>
+    </header>
+    <main class="width-limit">
+      <section id="sec-place">
+        <div class="padded">
+        {{template "yield" .}}
+        </div>
+      </section>
+    </main>
+  </div>
+  <footer>
+    <p>
+    Ha!
+    </p>
+  </footer>
+  <script src="/static/script.js"></script>
+	<script src="https://kit.fontawesome.com/41aeeab5c9.js" crossorigin="anonymous"></script>
+</body>
+</html>
+{{end}}

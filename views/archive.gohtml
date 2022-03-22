@@ -1,3 +1,4 @@
+{{define "yield"}}
 <h1>Archive</h1>
 {{range $y, $x := .}}
   {{if eq ($x.IsYear) true}}
@@ -6,4 +7,5 @@
   <a href="{{$x.BlogDir}}/{{$x.FileName}}">{{$x.Title}}</a>
   <br/>
   {{end}}
+{{end}}
 {{end}}
