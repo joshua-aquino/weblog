@@ -57,7 +57,7 @@ func completeArchives() []ArchiveEntry {
 	var archiveEntries []ArchiveEntry
 	archiveEntry := ArchiveEntry{}
 	lastYear := "XX"
-	re := regexp.MustCompile(`<title>[^<]*`)
+	re := regexp.MustCompile(`\{\{\$title := "[^"]*`)
 	files, err := os.ReadDir(blogDir)
 	if err != nil {
 		log.Fatal(err)
@@ -88,7 +88,7 @@ func completeArchives() []ArchiveEntry {
 		for _, eachline := range fileTextLines {
 			if re.MatchString(eachline) {
 				archiveEntry.Title =
-					strings.ReplaceAll(re.FindString(eachline), "<title>", "")
+					strings.ReplaceAll(re.FindString(eachline), "{{$title := \"", "")
 				continue
 			}
 		}
@@ -102,7 +102,7 @@ func completeArchives() []ArchiveEntry {
 
 const viewsDir string = "views/"
 const staticDir string = "static/"
-const blogDir string = "blogs/"
+const blogDir string = "blog/"
 
 type route struct {
 	method  string
@@ -145,8 +145,8 @@ func Serve(w http.ResponseWriter, r *http.Request) {
 
 var routes = []route{
 	addRoute("GET", "/", indexHandler),
-	addRoute("GET", "/blogs(/)?", archiveHandler),
-	addRoute("GET", "/blogs/([^/]+)", blogHandler),
+	addRoute("GET", "/blog(/)?", archiveHandler),
+	addRoute("GET", "/blog/([^/]+)", blogHandler),
 }
 
 //-----------------------------------------------------------------------------
@@ -174,6 +174,6 @@ func archiveHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func blogHandler(w http.ResponseWriter, r *http.Request) {
-	blog = NewView("default", "blogs/"+getField(r, 0))
+	blog = NewView("default", blogDir+getField(r, 0))
 	blog.Render(w, nil)
 }

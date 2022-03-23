@@ -33,7 +33,7 @@
 --mb-padding: 0.6rem;
 --tb-padding: 2rem;
 --dt-padding: 4rem;
---dt-width: 60rem;
+--dt-width: 50rem;
 }
 
 *,
@@ -47,7 +47,7 @@ html {
   height: 100vh;
   font-family: sans-serif;
   scroll-behavior: smooth;
-  background-image: url('static/images/background.webp');
+  background-image: url('/static/images/background.webp');
   background-attachment: fixed;
   background-size: 100vw auto;
 }
@@ -98,13 +98,22 @@ h3 {
   }
 }
 
-main > section:first-child,
-main > .section-sel:first-child {
+h4 {
+  font-size: 1rem;
+}
+@media only screen and (min-width: 30rem) {
+  h4 {
+    font-size: 1.3rem;
+  }
+}
+
+main > section:first-of-type,
+main > .section-sel:first-of-type {
   margin-top: 4rem;
 }
 @media only screen and (min-width: 30rem) {
-  main > section:first-child,
-  main > .section-sel:first-child {
+  main > section:first-of-type,
+  main > .section-sel:first-of-type {
     margin-top: 6rem;
   }
 }

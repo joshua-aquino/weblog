@@ -1,8 +1,107 @@
 {{define "yield"}}
-<div class="container">
-  <div class="jumbotron">
-    <h1>Welcome to my site!</h1>
-    <p>This is where I would normally ask you to sign up for something.</p>
+{{$title := "Joshua Aquino"}}
+<title>{{$title}}</title>
+<section id="sec-place">
+  <span class="scroll-point" id="places"></span>
+  <div class="padded">
+    <hgroup>
+      <h2>Places</h2>
+      <h3>This is a list of places I find interesting.</h3>
+    </hgroup>
+    <ol>
+      <li>
+          <a target="_blank"
+             href="https://ezgif.com/">ezgif</a>
+      </li>
+      <li>
+        <a target="_blank"
+           href="https://tonsky.me/">tonsky</a>
+        <a target="_blank"
+           href="https://github.com/mayfrost/guides/blob/master/ALTERNATIVES.md">alternatives</a>
+        <a target="_blank"
+           href="https://lukesmith.xyz/">lukesmith</a>
+        <a target="_blank"
+           href="https://www.taniarascia.com/">taniarascia</a>
+        <a target="_blank"
+           href="http://www.fial.com/~scott/tamsyn-font/">tamsyn</a>
+        <a target="_blank"
+           href="https://suckless.org/">suckless</a>
+      </li>
+      <li>
+        <a target="_blank"
+           href="http://thedarnedestthing.com/the%20darnedest%20thing">thedarndestthing</a>
+        <a target="_blank"
+           href="https://matthewgraygubler.com/home.html">matthewgraygubler</a>
+        <a target="_blank"
+           href="https://www.bakadesuyo.com/">bakadesuyo</a>
+        <a target="_blank"
+           href="https://evie-s.com/">evies</a>
+          </li>
+    </ol>
   </div>
-</div>
+</section>
+<section id="sec-thing">
+  <span class="scroll-point" id="things"></span>
+  <div class="padded">
+    <hgroup>
+      <h2>Things</h2>
+      <h3>This is a list of things I've worked on.
+        You can find most of them on 
+        <a href="https://github.com/joshua-aquino/" 
+          target="_blank">Github</a>.</h3>
+    </hgroup>
+    <div class="image-list">
+      <a href="https://saigonwokfl.com/" target="_blank">
+        <img src="/static/images/saigonwokfl.gif">
+        <span>
+          <i>saigonwokfl</i>
+          <p>The official website of Saigon Wok.</p>
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Javascript</li>
+            <li>PHP</li>
+            <li>MySQL</li>
+          </ul>
+        </span>
+      </a>
+      <a href="https://github.com/joshua-aquino/mazncalculator"
+        target="_blank">
+        <img src="/static/images/calculator-app.gif">
+        <span>
+          <i>mazncalculator</i>
+          <p>A calculator for Android.</p>
+          <ul>
+            <li>Java</li>
+            <li>Android</li>
+          </ul>
+        </span>
+      </a>
+      <a href="https://joshuaaquino.xyz/" target="_blank">
+        <img src="/static/images/joshuaaquino.webp">
+        <span>
+          <i>joshuaaquino</i>
+          <p>This website.</p>
+          <ul>
+            <li>Golang</li>
+            <li>HTML</li>
+            <li>CSS</li>
+          </ul>
+        </span>
+      </a>
+      <a href="https://github.com/joshua-aquino/shleep"
+        target="_blank">
+        <img src="/static/images/shleep.gif">
+        <span>
+          <i>shleep.</i>
+          <p>A sleep-breathing app for Android.</p>
+          <ul>
+            <li>Java</li>
+            <li>Android</li>
+          </ul>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
 {{end}}

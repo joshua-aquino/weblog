@@ -7,7 +7,6 @@
 	<meta name="description" content="This is Joshua Aquino's website."
 	<meta name="author" content="Joshua Aquino">
 	<link rel="icon" type="image/ico" href="/static/images/logo.png">
-	<title>Joshua Aquino</title>
 	<link href="/static/normalize.css" rel="stylesheet">
 	<link href="/static/style.css" rel="stylesheet">
 </head>
@@ -22,11 +21,7 @@
       </div>
     </header>
     <main class="width-limit">
-      <section id="sec-place">
-        <div class="padded">
-        {{template "yield" .}}
-        </div>
-      </section>
+    {{template "yield" .}}
     </main>
   </div>
   <footer>

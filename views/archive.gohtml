@@ -1,11 +1,20 @@
 {{define "yield"}}
-<h1>Archive</h1>
-{{range $y, $x := .}}
-  {{if eq ($x.IsYear) true}}
-  <h2>20{{$x.Title}}</h2>
-  {{else}}
-  <a href="{{$x.BlogDir}}/{{$x.FileName}}">{{$x.Title}}</a>
-  <br/>
-  {{end}}
-{{end}}
+{{$title := "Blog Archive"}}
+<title>{{$title}}</title>
+<section id="sec-place">
+  <div class="padded">
+    <hgroup>
+      <h2>{{$title}}</h2>
+      <h3>This is where I save my web logs.</h3>
+    </hgroup>
+    {{range $y, $x := .}}
+      {{if eq ($x.IsYear) true}}
+      <h4>20{{$x.Title}}</h4>
+      {{else}}
+      <a href="{{$x.BlogDir}}{{$x.FileName}}">{{$x.Title}}</a>
+      <br/>
+      {{end}}
+    {{end}}
+  </div>
+</section>
 {{end}}

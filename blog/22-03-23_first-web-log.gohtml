@@ -1,0 +1,28 @@
+{{define "yield"}}
+{{$title := "Baby's First Web Log"}}
+<title>{{$title}}</title>
+<section id="sec-place">
+  <div class="padded">
+    <hgroup>
+      <h2>{{$title}}</h2>
+      <h3>Fools! They said I couldn't do it...</h3>
+    </hgroup>
+    <p>
+      ...but I did! I setup a blog with Golang! It is disgusting, really.
+      I just pulled code snippits from different ideas and bundled them into
+      <i>this</i> monster. Troubleshooting 'main.go' is like swimming in a bowl
+      of spaghetti. That's okay. What's important is that it works for the time
+      being.
+    </p>
+    <p>
+      As the site currently stands, I made use of the following ::
+    </p>
+    <ol>
+      <li><a target="_blank" href="https://benhoyt.com/writings/go-routing/">
+      Ben Hoyt's solution to Golang routing</a></li>
+      <li><a target="_blank" href="https://www.calhoun.io/intro-to-templates-p4-v-in-mvc/">
+      soft MVC structure from calhoun.io</a></li>
+    </ol>
+  </div>
+</section>
+{{end}}
