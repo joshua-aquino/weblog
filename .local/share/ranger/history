@@ -1,0 +1,14 @@
+
+rename bob.html
+shell mkdir blog
+shell mkdir 2022
+rename 02-26_first-page.html
+shell nvim 
+shell mkdir src
+rename .go
+rename TestPage.html
+shell l
+shell nvim
+delete
+shell nvim %f
+rename 22-03-23_first-web-log.gohtml

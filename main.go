@@ -145,8 +145,22 @@ func Serve(w http.ResponseWriter, r *http.Request) {
 
 var routes = []route{
 	addRoute("GET", "/", indexHandler),
-	addRoute("GET", "/blog(/)?", archiveHandler),
+	addRoute("GET", "/blog", archiveHandler),
 	addRoute("GET", "/blog/([^/]+)", blogHandler),
+}
+
+//-----------------------------------------------------------------------------
+
+func redirect(w http.ResponseWriter, req *http.Request) {
+    // remove/add not default ports from req.Host
+    target := "https://" + req.Host + req.URL.Path
+    if len(req.URL.RawQuery) > 0 {
+        target += "?" + req.URL.RawQuery
+    }
+    log.Printf("redirect to: %s", target)
+    http.Redirect(w, req, target,
+            // see comments below and consider the codes 308, 302, or 301
+            http.StatusTemporaryRedirect)
 }
 
 //-----------------------------------------------------------------------------
@@ -156,11 +170,12 @@ var archive *View
 var blog *View
 
 func main() {
+	go http.ListenAndServe(":43080", http.HandlerFunc(redirect))
 	index = NewView("default", "views/index.gohtml")
 	archive = NewView("default", "views/archive.gohtml")
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", Serve)
-	http.ListenAndServe(":8000", nil)
+	http.ListenAndServeTLS(":43443", ".lego/certificates/joshuaaquino.xyz.crt", ".lego/certificates/joshuaaquino.xyz.key", nil)
 
 }
 
