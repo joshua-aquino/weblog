@@ -175,7 +175,7 @@ func main() {
 	archive = NewView("default", "views/archive.gohtml")
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", Serve)
-	http.ListenAndServeTLS(":43443", ".lego/certificates/joshuaaquino.xyz.crt", ".lego/certificates/joshuaaquino.xyz.key", nil)
+	http.ListenAndServeTLS(":43443", "../.lego/certificates/joshuaaquino.xyz.crt", "../.lego/certificates/joshuaaquino.xyz.key", nil)
 
 }
 
